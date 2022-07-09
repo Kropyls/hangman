@@ -9,6 +9,19 @@ class Game
     @word = word.split('')
   end
 
+  def play
+    count = 8
+    until @current_guess == @word || count.zero?
+      puts @current_guess.join(' ')
+      letter = player_guess
+      count -= 1 unless check_guess(letter)
+      puts "Guesses left: #{count}"
+    end
+    count.zero? ? (puts "LOSE, word was: #{@word.join('')}") : (puts "WIN! Word was: #{@word.join('')}")
+  end
+
+  private
+  
   def player_guess
     puts 'Please enter a letter. Only one letter is allowed and cannot have already been chosen.'
     letter = gets.chomp.downcase
@@ -27,17 +40,6 @@ class Game
       return true
     end
     false
-  end
-
-  def play
-    count = 8
-    until @current_guess == @word || count.zero?
-      puts @current_guess.join(' ')
-      letter = player_guess
-      count -= 1 unless check_guess(letter)
-      puts "Guesses left: #{count}"
-    end
-    count.zero? ? (puts "LOSE, word was: #{@word.join('')}") : (puts 'WIN')
   end
 end
 
