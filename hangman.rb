@@ -1,4 +1,4 @@
-# Top level comment
+# Game class for the game
 class Game
   def initialize
     dicionary = File.readlines './google-10000-english-no-swears.txt'
@@ -30,13 +30,14 @@ class Game
   end
 
   def play
-    count = 0
-    until @current_guess == @word
+    count = 8
+    until @current_guess == @word || count.zero?
       puts @current_guess.join(' ')
       letter = player_guess
-      count += 1 unless check_guess(letter)
-      puts count
+      count -= 1 unless check_guess(letter)
+      puts "Guesses left: #{count}"
     end
+    count.zero? ? (puts "LOSE, word was: #{@word.join('')}") : (puts 'WIN')
   end
 end
 
