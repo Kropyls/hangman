@@ -1,0 +1,3 @@
+# Ignore yml and bak files
+*.yml
+*.bak
